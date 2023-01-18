@@ -1,7 +1,5 @@
 #lang racket/base
 
-(require rackunit)
-
 (define-struct leaf [])
 (define-struct tree (num left right))
 
