@@ -1,5 +1,4 @@
 #lang plait
-
 (require "main.rkt")
 
 (define empty-tree (leaf 0))
@@ -13,12 +12,16 @@
                               (node -3 (node -4 empty-tree empty-tree)
                                             empty-tree)))
 
-;;; (test (tree-sum empty-tree) 0)
-;;; (test (tree-sum tree-one) 6)
-;;; (test (tree-sum tree-two) 10)
+;;;Test for Q1
+(test (tree-sum empty-tree) 0)
+(test (tree-sum tree-one) 6)
+(test (tree-sum tree-two) 10)
 
+;;; Test for Q2
 (test (negate-tree tree-one) neg-tree-one)
 (test (negate-tree tree-two) neg-tree-two)
+
+;;;Test for Q3
 
   
 
