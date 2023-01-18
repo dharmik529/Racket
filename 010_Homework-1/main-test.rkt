@@ -22,6 +22,11 @@
 (test (negate-tree tree-two) neg-tree-two)
 
 ;;;Test for Q3
+(test (contains? tree-one 6) #f)
+(test (contains? tree-one 3) #t)
+(test (contains? tree-two 1) #t)
+(test (contains? tree-two 9) #f)
+
 
   
 

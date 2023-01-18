@@ -25,3 +25,7 @@
 
 ;;; Implement the function contains?, which takes a tree and a number 
 ;;; and returns #t if the number is in the tree, #f otherwise.
+(define (contains? atree anum)
+  (cond [(leaf? atree) (= (leaf-val atree) anum)]
+        [(node? atree) (or (= (node-val atree) anum) (contains? (node-left atree) anum) (contains? (node-right atree) anum))]
+        [else #f]))
