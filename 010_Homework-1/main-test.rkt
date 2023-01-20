@@ -32,24 +32,16 @@
 (test (big-leaves? (node 5 (node 2 (leaf 8) (leaf 6)) (leaf 7))) #f)
 
 ;;; Test for Q5
-(test (positive-trees? (cons (leaf 6)
-                             empty))
-      #t)
+(test (positive-trees? (cons (leaf 6) empty)) #t)
 
-(test (positive-trees? (cons (leaf -6)
-                             empty))
-      #f)
+(test (positive-trees? (cons (leaf -6) empty)) #f)
 
-(test (positive-trees? (cons (node 1 (leaf 6) (leaf -6))
-                             empty))
-      #t)
+(test (positive-trees? (cons (node 1 (leaf 6) (leaf -6)) empty)) #t)
 
 (test (positive-trees? (cons (node 1 (leaf 6) (leaf -6))
                              (cons (node 0 (leaf 0) (leaf 1))
-                                   empty)))
-      #t)
+                                   empty))) #t)
 
 (test (positive-trees? (cons (node -1 (leaf 6) (leaf -6))
                              (cons (node 0 (leaf 0) (leaf 1))
-                                   empty)))
-        #f)
+                                   empty))) #f)
