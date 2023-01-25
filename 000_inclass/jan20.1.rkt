@@ -10,6 +10,7 @@
 (define (parse s)
   (cond
     ([s-expr-number? s] (s-exp-number s))
-    ...))
+    ([s-expr-symbol? s `+]
+    ..)))
 
 (define s '(+ 1 (- 2 3)))
