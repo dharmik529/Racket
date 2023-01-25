@@ -1,11 +1,12 @@
 #lang plait
 (define option 'extra)
 
-
 #|PROBLEM 1
 returns a list containing n copies of x|#
 (define (duple n x)
-  ...) 
+  (cond [(zero? n) empty]
+        [else (cons x (duple (sub1 n) x))]))
+        
 
 (test (duple 2 3)
       '(3 3))
@@ -23,6 +24,7 @@ greater than > descending
                [int-list1 : (Listof Number)]
                [int-list2 : (Listof Number)]) : (Listof Number)
   ...)
+
 (test (merge < '(1 4 6) '(2 5 8))
       '(1 2 4 5 6 8))
 (test (merge > '(6 4 1) '(8 5 2))
@@ -41,3 +43,4 @@ define a type to allow for the output of a list of associations
       '((?_t 'a 1) (?_t 'b 2) (?_t 'c 3) (?_t 'd 4)))
 (test (make-assoc '(t a c o tuesday) '(0 1 34 1729 42))
       '((?_t 't 0) (?_t 'a 1) (?_t 'c 34) (?_t 'o 1729) (?_t 'tuesday 42)))
+
