@@ -8,17 +8,17 @@
   (multE [l : Exp]
          [r : Exp])
   (appE [s : Symbol]
-        [args : Exp])
+        [args : (Listof Exp)])
   (maxE [s1 : Exp]
         [s2 : Exp]))
 
 (define-type Func-Defn
   (fd [name : Symbol]
-      [arg : Symbol]
+      [args : (Listof Symbol)]
       [body : Exp]))
 
-;;; (module+ test
-;;;   (print-only-errors #t))
+(module+ test
+    (print-only-errors #t))
 
 ;; An EXP is either
 ;; - `NUMBER
@@ -41,9 +41,10 @@
     [(s-exp-match? `{* ANY ANY} s)
      (multE (parse (second (s-exp->list s)))
             (parse (third (s-exp->list s))))]
-    [(s-exp-match? `{SYMBOL ANY} s)
+    [(s-exp-match? `{SYMBOL ANY ...} s)
      (appE (s-exp->symbol (first (s-exp->list s)))
-           (parse (second (s-exp->list s))))]
+           (map parse (rest (s-exp->list s))))]
+           ;(parse (second (s-exp->list s))))]
     [(s-exp-match? `{max ANY ANY} s) ;; Making s into type : maxE
      (maxE (parse (second (s-exp->list s)))
            (parse (third (s-exp->list s))))]
@@ -93,7 +94,7 @@
     [(multE l r) (* (interp l defs) (interp r defs))]
     [(appE s arg) (local [(define fd (get-fundef s defs))]
                     (interp (subst (numE (interp arg defs))
-                                   (fd-arg fd)
+                                   (fd-arg fd))
                                    (fd-body fd))
                             defs))]
     [(maxE e1 e2) (max (interp e1 defs) (interp e2 defs))]))
