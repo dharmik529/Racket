@@ -18,7 +18,7 @@
       [body : Exp]))
 
 (module+ test
-  (print-only-errors #t))
+  )
 
 ;; An EXP is either
 ;; - `NUMBER
@@ -78,6 +78,9 @@
         (fd 'double 'x (plusE (idE 'x) (idE 'x))))
   (test/exn (parse-fundef `{def {f x} x})
             "invalid input")
+  (test/exn (parse-fundef `{maxE {f x} x})
+            "invalid input")
+
 
   (define double-def
     (parse-fundef `{define {double x} {+ x x}}))
@@ -171,17 +174,5 @@
 
 (test (interp (parse `{max {+ 4 5} {+ 2 3}}) (list)) 9)
 
-(test (interp (parse `{max {* 3 7} {+ 91 9}}) (list)) 100)
-
-;; test cases for question 2
-;;; (test (interp (parse `{f 1 2}) ;; arg1
-;;;               (list (parse-fundef `{define {f x y} {+ x y}}))) ;; arg2 
-;;;               3) ;; expected
-;;; (test (interp (parse `{+ {f} {f}}) ;; arg1
-;;;               (list (parse-fundef `{define {f} 5}))) ;; arg2
-;;;               10) ;; expected
-;;; (test/exn (interp (parse `{f 1}) ;; arg3
-;;;                   (list (parse-fundef `{define {f x y} {+ x y}}))) ;; arg2
-;;;                   "wrong arity") ;; expected
-
-;;Number 2: Map the List in interpreter 
+(test/exn (parse-fundef `{maxE {+ f x} x})
+            "invalid input")
