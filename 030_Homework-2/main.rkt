@@ -171,6 +171,8 @@
 
 (test (interp (parse `{max {+ 4 5} {+ 2 3}}) (list)) 9)
 
+(test (interp (parse `{max {* 3 7} {+ 91 9}}) (list)) 100)
+
 ;; test cases for question 1
 (test (interp (parse `{f 1 2}) ;; arg1
               (list (parse-fundef `{define {f x y} {+ x y}}))) ;; arg2 
