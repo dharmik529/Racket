@@ -179,16 +179,3 @@
 (test (interp (parse `{max {+ 4 5} {+ 2 3}}) (list)) 9)
 
 (test/exn (parse-fundef `{maxE {+ f x} x}) "invalid input")
-
-;; test cases for question 2
-;;; (test (interp (parse `{f 1 2})
-;;;               (list (parse-fundef `{define {f x y} {+ x y}})))
-;;;                 3)
-
-;;; (test (interp (parse `{+ {f} {f}})
-;;;               (list (parse-fundef `{define {f} 5})))
-;;;                 10)
-
-;;; (test/exn (interp (parse `{f 1})
-;;;                   (list (parse-fundef `{define {f x y} {+ x y}})))
-;;;                     "wrong arity")
