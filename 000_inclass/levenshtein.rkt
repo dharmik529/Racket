@@ -21,7 +21,7 @@ https://en.wikipedia.org/wiki/Levenshtein_distance
                   (dist (rest w1) (rest w2))))]))
 
 
-(define (mins x y z)
+(define (mins x y z
   (min x (min y z)))
 
 (test (dist w1 w2) 2 )
