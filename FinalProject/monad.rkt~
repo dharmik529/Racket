@@ -42,10 +42,44 @@
     (string-append (string-append customer " referral: ") n))
     '("1" "2" "3")))
 
+; -------------------------------------------
+; BIND EXAMPLE
+; -------------------------------------------
+
 (define (get-customer-referrals customers)
   (list-bind customers get-referrals))
 
+; -------------------------------------------
+; OTHER
+; -------------------------------------------
 
+(define-type a
+  (Box [open : Boolean]))
+
+(define (box-map f bx)
+  (Box (f (Box-open bx))))
+
+(define (box-unit x)
+  (Box x))
+
+(define (box-join bx)
+  (Box-open bx))
+
+(define (box-bind ma f)
+  (box-join (box-map f ma)))
+
+(define (box-even? n)
+  (if (eq? (modulo n 2) 0)
+      (Box #t)
+      (Box #f)))
+#|
+(define (box-return bx)
+  ...)
+
+(define (imperative-1 n)
+  (box-bind (box-even? n) (λ ([b : Boolean])
+                            (box-return (if b "Even" "Odd")))))
+|#
 ; -------------------------------------------
 ; TESTS
 ; -------------------------------------------
