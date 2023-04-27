@@ -4,7 +4,8 @@
 ; FUNCTOR
 ; -------------------------------------------
 
-(define (even? n) (eq? (modulo n 2) 0))
+(define (even? [n : Number]) : Boolean
+  (eq? (modulo n 2) 0))
 
 ; -------------------------------------------
 ; UNIVERSAL UNITARIANISM
@@ -56,8 +57,8 @@
 (test (list-even? 2) '(2))
 (test (my-filter list-even? '(1 2 3)) '(() (2) ()))
 (test (list-join '(() (2) ())) '(2))
-(test (list-join (my-filter list-even? '(1 2 3))) '(2))
-(test (list-bind '(1 2 3) list-even?) '(2))
+(test (list-join (my-filter list-even? '(1 2 3 4))) '(2 4))
+(test (list-bind '(1 2 3 4 5 6) list-even?) '(2 4 6))
 
 (test (get-referrals "Dave")
       '("Dave referral: 1"
