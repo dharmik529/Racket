@@ -4,6 +4,9 @@
 ; FUNCTOR
 ; -------------------------------------------
 
+; In a monad, a functor is used to apply a pure function to a value in the context of the monad,
+; while preserving the structure of the monad.
+; This functor function which looks for even numbers and uses the map test function to map it to a list which is false or true
 (define (even? n) (eq? (modulo n 2) 0))
 
 ; -------------------------------------------
@@ -24,7 +27,11 @@
 ; -------------------------------------------
 ; JOIN
 ; -------------------------------------------
-
+; Function is list-join which takes a list of lists as input and returns a single list that concatenates all
+; sub-lists in the input list
+; foldr is the function which is taking the binary operator (lambda) which takes 2 lists and applies lambda to the two lists
+; this return their concatenation using the append function
+; initial foldr function is the empty lists which is the identiy element for the append operation.
 (define (list-join xss)
   (foldr (λ ([ y  : (Listof 'a)]
               [ ys : (Listof 'a)]) (append y ys))
@@ -37,6 +44,7 @@
 (define (list-bind lst f)
   (list-join (map f lst)))
 
+; writer monad
 (define (get-referrals customer)
   (map (λ ([n : String])
     (string-append (string-append customer " referral: ") n))
@@ -50,7 +58,7 @@
 ; TESTS
 ; -------------------------------------------
 
-(test (map even? '(1 2 3)) '(#f #t #f))
+(test (map even? '(1 2 3)) '(#f #t #f)) ;maps with the functor which is usign the module in order to determine a false and true value for even numbers.
 (test (list-unit 3) '(3))
 (test (list-even? 3) '())
 (test (list-even? 2) '(2))
